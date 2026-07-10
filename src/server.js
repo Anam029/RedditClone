@@ -1,5 +1,5 @@
 import dotenv from "dotenv"
-
+import app from "./app.js"
 
 
 import connectdb from "./db/db.js";
@@ -13,5 +13,7 @@ if(!process.env.MONGODB_URI){
     throw new Error("MONGODB_URL is not defined");
     
 }
-
-connectdb()
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
+});
+await connectdb()

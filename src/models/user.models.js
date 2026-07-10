@@ -21,16 +21,16 @@ const userSchema = new Schema({
         type: String,
         required: [true,"Password is required"],
         
-    }, avatar:{
-        type: String,   //Cloundinary url  
-        required: true,
-    },refreshtoken:{
+    
+    },
+    
+    refreshToken:{
       type: String,
 
     }
 
 },{timestamps: true})
 
-const User = mongoose.Model("User",userSchema)
+const User = mongoose.model("User",userSchema)
 
 export {User}

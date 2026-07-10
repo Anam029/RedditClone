@@ -6,6 +6,7 @@ export async function register(req, res){
         
     
     const{username,password,email} = req.body;
+    console.log(req.body)
 
     if(!username || !password || !email){
         return res.status(400).json({
@@ -93,10 +94,10 @@ export async function login(req, res) {
   },
   process.env.REFRESH_TOKEN_SECRET,
   {
-    expiresIn: REFRESH_TOKEN_EXPIRY,
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
   }
 )
-res.cookie("refreshtoken",refreshtoken,{
+res.cookie("refreshToken",refreshToken,{
     httpOnly: true,
     secure: true
 })
