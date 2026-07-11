@@ -18,6 +18,6 @@ app.use("/api/user",userRouter)
 
 app.use("/api/v1", communityRouter)
 
-app.use("/api/v1",postRouter)
+app.use("/api/post",postRouter)
 
 export default app
