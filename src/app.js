@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser"
 
 import userRouter from "./routes/user.router.js"
 import communityRouter from "./routes/community.routes.js"
-
+import postRouter from "./routes/post.routers.js"
 
 const app = express();
 
@@ -18,5 +18,6 @@ app.use("/api/user",userRouter)
 
 app.use("/api/v1", communityRouter)
 
+app.use("/api/v1",postRouter)
 
 export default app
