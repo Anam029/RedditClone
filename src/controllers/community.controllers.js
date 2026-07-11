@@ -120,7 +120,7 @@ export async function deleteCommunity(req,res){
          message: "Community not found"
       })
       return res.status(200).json({
-         message: "Deleted Community"
+         message: "Deleted the Community"
       })
    }
    } catch (error) {
