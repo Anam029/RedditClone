@@ -39,7 +39,7 @@ export async function getAllNotifications(req, res) {
         const notifications = await Notification.find({
             receiver: req.user._id
         })
-            .populate("sender", "username profilePicture")
+            .populate("sender", "username")
             .populate("post")
             .populate("comment")
             .populate("community")
