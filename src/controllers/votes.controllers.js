@@ -1,7 +1,7 @@
-import Vote from "../models/vote.model.js";
-import Post from "../models/post.model.js";
+import {Votes} from "../models/votes.models.js"
+import {Post} from "../models/post.models.js";
 
-export const upVote = async (req, res) => {
+export async function upVote (req, res)  {
     try {
         const { postId } = req.body;
         const userId = req.user._id;
@@ -24,14 +24,14 @@ export const upVote = async (req, res) => {
         }
 
         
-        const existingVote = await Vote.findOne({
+        const existingVote = await Votes.findOne({
             user: userId,
             post: postId
         });
 
         
         if (!existingVote) {
-            await Vote.create({
+            await Votes.create({
                 user: userId,
                 post: postId,
                 type: "upvote"
@@ -45,7 +45,7 @@ export const upVote = async (req, res) => {
 
         
         if (existingVote.type === "upvote") {
-            await Vote.findByIdAndDelete(existingVote._id);
+            await Votes.findByIdAndDelete(existingVote._id);
 
             return res.status(200).json({
                 success: true,
@@ -90,12 +90,12 @@ export async function downVote(req,res){
         message: "UserId not found"
     })
  }
-  const existingVote = await Vote.findOne({
+  const existingVote = await Votes.findOne({
      user: userid,
      post: postId,
   })
   if(!existingVote){
-    await Vote.create({
+    await Votes.create({
         user: userid,
         post: postId,
         type: "downvote"
@@ -105,7 +105,7 @@ export async function downVote(req,res){
     })
   }
  if( existingVote.type === "downvote"){
-        await Vote.findByIdAndDelete(existingVote._id)
+        await Votes.findByIdAndDelete(existingVote._id)
         return res.status(200).json({
             sucess: true,
             message: "Downvote removed"
@@ -129,3 +129,4 @@ export async function downVote(req,res){
         })
     }
 }
+
