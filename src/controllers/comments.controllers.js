@@ -1,5 +1,5 @@
-import { Comment } from "../models/comments.models";
-import { Post } from "../models/post.models";
+import { Comment } from "../models/comments.models.js";
+import { Post } from "../models/post.models.js";
 export async function CreateComment(req,res){
     try {
         const {text,post} = req.body

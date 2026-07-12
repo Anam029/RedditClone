@@ -1,4 +1,4 @@
-import { Community} from "../models/community.models";
+import { Community} from "../models/community.models.js";
 
 export async function createCommunity (req,res){
      try {
@@ -11,8 +11,9 @@ export async function createCommunity (req,res){
         
      }
 
-     const existingCommunity = Community.findOne({
-        name = name.tolowercase()
+     const existingCommunity = await Community.findOne({
+       name: name.toLowerCase()
+        
      })
      if(existingCommunity){
         return res.status(409).json({
@@ -20,19 +21,20 @@ export async function createCommunity (req,res){
             message: "Community already exist"
         })
      }
-     const community = Community.create({
-        name: name.tolowercase(),
+     const community = await  Community.create({
+        name: name.toLowerCase(),
         displayname,
         description,
-        owner: [req.user_.id],
-        moderators: [req.user_.id],
-        members: [req.user_.id],
+        owner: req.user._id,
+        moderators: [req.user._id],
+         members: [req.user._id]
 
 
 
      })
      return res.status(201).json({
-        message: "Sucessfully created community"
+        message: "Sucessfully created community",
+        community
      })
      } catch (error) {
         return res.status(500).json({
@@ -46,12 +48,12 @@ export async function createCommunity (req,res){
 export async function getAllCommunity(req,res){
      try {
          const communities = await Community.find()
-         return res.response(200).json({
+         return res.status(200).json({
             success:true,
             communities
          })
      } catch (error) {
-         return res.response(500).json({
+         return res.status(500).json({
             success:false,
             message: error.message
          })
@@ -60,8 +62,8 @@ export async function getAllCommunity(req,res){
 
 export async function getOneCommunity(req,res){
    try {
-     const {communityId} = req.body.params
-     const community = await Community.findById({communityId})
+     const {communityId} = req.params
+     const community = await Community.findById(communityId)
      if(!community){
       return res.status(404).json({
          message: "Community not found"
@@ -85,7 +87,7 @@ export async function updateCommunity(req,res){
        try {
          const {communityId} = req.params
          const {name,isPrivate} = req.body
-         const community = await Community.findByIdAndUpdate(communityId)
+         const community = await Community.findById(communityId)
        if(!community){
          return res.status(404).json({
             message : "Community not found"
@@ -99,7 +101,7 @@ export async function updateCommunity(req,res){
          community.isPrivate = isPrivate
       }
         await community.save()
-       return res.satus(200).json({
+       return res.status(200).json({
          message: "Update community succesfully"
        })
 
@@ -119,12 +121,13 @@ export async function deleteCommunity(req,res){
       return res.status(404).json({
          message: "Community not found"
       })
-      return res.status(200).json({
+      
+   }
+   return res.status(200).json({
          message: "Deleted the Community"
       })
-   }
    } catch (error) {
-      return res.status(500),json({
+      return res.status(500).json({
          message: error.message
       })
    }

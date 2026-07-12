@@ -28,10 +28,11 @@ const communitySchema = new Schema({
         ref:"User"
     },],
     members:[{
-        types: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User"
     }], isPrivate:[{
         type:  Boolean,
+        default: false,
         rules:[
             
             "Be grateful",

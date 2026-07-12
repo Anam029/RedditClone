@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { verifyJWT } from "../middlewares/verify-auth.middlewares"
+import { verifyJWT } from "../middlewares/verify-auth.middlewares.js"
 import {
     createCommunity, getAllCommunity,getOneCommunity, updateCommunity,deleteCommunity
 } from "../controllers/community.controllers.js"

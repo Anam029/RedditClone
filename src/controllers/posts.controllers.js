@@ -1,4 +1,4 @@
-import { Post } from "../models/post.models";
+import { Post } from "../models/post.models.js";
 
 export async function createPosts(req,res){
      try {
