@@ -1,4 +1,4 @@
-import { Chat } from "../models/chats.models";
+import { Chat } from "../models/chats.models.js";
 
 
 
@@ -116,7 +116,7 @@ export async function updateChat(req, res) {
     }
 }
 
-export function deleteChat(req,res){
+export async function deleteChat(req,res){
     try {
         const {chatId} = req.params
         if (!chatId) {

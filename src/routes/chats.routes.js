@@ -7,3 +7,5 @@ router.post("/chat",createChat)
 router.get("/chat",getChat)
 router.patch("/chat/id",updateChat)
 router.delete("/chat/id",deleteChat)
+
+export default router
