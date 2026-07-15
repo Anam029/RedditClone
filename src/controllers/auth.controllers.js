@@ -115,4 +115,6 @@ return res.status(200).json({
   }
 }
 
-
+export async function logout(req,res){
+  
+}
