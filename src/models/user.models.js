@@ -20,6 +20,10 @@ const userSchema = new Schema({
     },password:{
         type: String,
         required: [true,"Password is required"],
+        match: [
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
+    "Password must contain uppercase, lowercase, number and special character."
+  ]
         
     
     },

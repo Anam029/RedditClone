@@ -1,7 +1,14 @@
-import http from "http"
-import express from "express"
+import {createServer} from "http"
+import app from "./app.js"
+import { Server } from "socket.io"
 
-const app = express()
-const server = http.createServer(app)
+const server = createServer(app)
 const io = new Server(server)
-server.listen(process.env.PORT || 8000)
+
+io.on("connection",(socket) =>{
+    console.log("User connected")
+})
+
+io.on("connection", (socket) => {
+    console.log(socket.id);
+});
