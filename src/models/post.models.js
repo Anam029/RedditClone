@@ -33,9 +33,12 @@ downVotes: [
         ref: "User"
     }
 ],
-views:[{
+views:{
     type: Number,
     default: "0"
+},
+image:[{
+  type: String,
 }]
 
 

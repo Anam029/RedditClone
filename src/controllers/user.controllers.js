@@ -44,16 +44,18 @@ export async function GetUserProfile(req,res){
 
 export async function SearchUser(req,res){
     try {
-        const {query} = req.query
-        console.log(query)
+        const {keyword} = req.query
+        console.log(keyword)
         const users = await User.find({
            username:{
-            $regex: query,
+            $regex: keyword,
             $options: "i"
-
+          
            }
            
+           
         }).select("-password -refreshToken")
+        console.log(users)
       
        if(users.length === 0){
         return res.status(404).json({
@@ -64,6 +66,7 @@ export async function SearchUser(req,res){
         users
        })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
           message : "Server error"
         })
