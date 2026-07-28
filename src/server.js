@@ -4,7 +4,9 @@ import {createServer} from "http"
 import connectdb from "./db/db.js";
 import { Server } from "socket.io";
 
+import dns from "dns"
 
+dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 dotenv.config({
     path:  "./.env"
